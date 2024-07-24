@@ -75,12 +75,17 @@ const getPostsByCategory = async (req, res) => {
   res.json(result);
 };
 const addPost = async (req, res) => {
-  const { _id: owner } = req.user;
+  const { _id: owner, userName, email } = req.user;
   const fileData = await cloudinary.uploader.upload(req.file.path, {
     folder: "marketPosts",
   });
   await fs.unlink(req.file.path);
-  const result = await Post.create({ ...req.body, image: fileData.url, owner });
+  const result = await Post.create({
+    ...req.body,
+    image: fileData.url,
+    owner,
+    user: { userName, email },
+  });
 
   res.status(201).json(result);
 };
