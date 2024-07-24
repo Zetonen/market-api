@@ -43,6 +43,7 @@ const postSchema = new Schema(
       type: String,
       default: "",
     },
+    user: Schema.Types.Mixed,
   },
   { versionKey: false, timestamps: true }
 );

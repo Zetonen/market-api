@@ -82,7 +82,7 @@ const addPost = async (req, res) => {
   await fs.unlink(req.file.path);
   const result = await Post.create({
     ...req.body,
-    image: fileData.url,
+    image: fileData.secure_url,
     owner,
     user: { userName, email },
   });
